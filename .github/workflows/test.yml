@@ -34,7 +34,7 @@ jobs:
       shell: bash
       run: |
         echo 'source /opt/ros/humble/setup.bash' >> $BASH_ENV
-        source $BASH_ENV
+        source ./ast_ws/install/setup.bash
 
     - name: Install Python dependencies
       run: |
