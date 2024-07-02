@@ -33,7 +33,7 @@ jobs:
     - name: Source ROS 2 environment
       shell: bash
       run: |
-        echo 'source /opt/ros/humble/setup.bash' >> $BASH_ENV
+        source /opt/ros/humble/setup.bash
         source ./ast_ws/install/setup.bash
 
     - name: Install Python dependencies
