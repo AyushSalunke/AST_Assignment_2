@@ -15,17 +15,34 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-
-    - name: Install dependencies
+    - name: Set up ROS 2
       run: |
-        python -m pip install --upgrade pip
-        pip install rclpy py_trees py_trees_ros
+        sudo apt-get update -q
+        sudo apt-get install -y curl gnupg2 lsb-release
+        curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+        sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
+        sudo apt-get update -q
+        sudo apt-get install -y ros-foxy-desktop
+
+    - name: Setup ROS 2 dependencies
+      run: |
+        sudo apt-get update -q
+        sudo apt-get install -y python3-colcon-common-extensions
+        sudo apt-get install -y ros-foxy-rclpy ros-foxy-sensor-msgs ros-foxy-geometry-msgs
+
+    - name: Source ROS 2 environment
+      shell: bash
+      run: |
+        echo 'source /opt/ros/foxy/setup.bash' >> $BASH_ENV
+        source $BASH_ENV
+
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install py_trees py_trees_ros
 
     - name: Run tests
+      shell: bash
       run: |
-        sudo apt-get install ros-foxy-rclpy ros-foxy-sensor-msgs ros-foxy-geometry-msgs
-        python -m unittest discover -s tests
+        source /opt/ros/foxy/setup.bash
+        ros2 launch your_package_name test_behaviours_launch.py
