@@ -22,7 +22,8 @@
   <exec_depend>ros2launch</exec_depend>
   <exec_depend>ros2run</exec_depend>
   <exec_depend>ros2topic</exec_depend>
-  <exec_depend>unittest</exec_depend>  
+  <exec_depend>unittest</exec_depend>
+  <depend>example_interfaces</depend>  
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
