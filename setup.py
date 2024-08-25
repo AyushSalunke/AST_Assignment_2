@@ -25,7 +25,8 @@ setup(
         'console_scripts': [
             'robot_safety_behaviour_tree = my_pkg.robot_safety_behaviour_tree:main',
             'robot_safety_state_machine = my_pkg.robot_safety_state_machine:main',
-            'test_behaviours = my_pkg.test_behaviours:main'
+            'test_behaviours = my_pkg.test_behaviours:main',
+            'follower_robot = my_pkg.follower_robot:main'
         ],
     },
 )
